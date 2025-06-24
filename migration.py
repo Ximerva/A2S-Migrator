@@ -520,7 +520,7 @@ def main():
         logger.info(f"No name provided, using default: '{playlist_name}'")
 
     playlist_id = create_playlist(
-        sp, playlist_name, "Migrated from Anghami using the migrator tool.")
+        sp, playlist_name, "Migrated from Anghami using A2S-Migrator (https://github.com/PierreRamez/A2S-Migrator).")
 
     # Add songs to the playlist
     add_tracks_to_playlist(sp, playlist_id, found_track_uris)
