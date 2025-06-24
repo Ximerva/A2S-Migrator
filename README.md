@@ -1,40 +1,96 @@
-# Anghami to Spotify Playlist Migration
-This Python script allows you to migrate playlists from Anghami to Spotify. 
+# Anghami to Spotify Playlist Migrator
 
-It utilizes the Spotify API, along with the BeautifulSoup and Spotipy libraries, to fetch the playlist information and copy it to your Spotify account.
+This tool allows you to migrate your liked songs or any public playlist from Anghami to a new playlist in your Spotify account. It uses a Selenium-based extractor to fetch song data directly from the Anghami web player and a smart matching algorithm to find the corresponding tracks on Spotify.
+
+![Main Menu Screenshot](https://i.imgur.com/your-screenshot.png) <!-- Replace with a real screenshot URL -->
+
+## Features
+
+-   **Live Extraction:** No need to manually download HTML files. The tool controls a web browser to extract data live.
+-   **Smart Song Matching:** Uses multiple strategies and a similarity algorithm to find the correct songs, even with variations in titles (e.g., "Live", "Remix", "feat.").
+-   **Detailed Reporting:** Generates both a `JSON` and a readable `TXT` report detailing which songs were found and which were not.
+-   **Interactive CLI:** A simple and clean menu-driven interface to guide you through the process.
+-   **Cross-Platform:** Works with Chrome, Firefox, and Edge on any OS that supports them.
 
 ## Prerequisites
-Before running this script, ensure that you have the following installed on your machine:
 
-1. Python 3.x
-2. pip (Python package installer)
+-   Python 3.7+
+-   One of the following web browsers installed:
+    -   Google Chrome (or any Chromium-based browser)
+    -   Mozilla Firefox
+    -   Microsoft Edge
+-   A Spotify account with a new App created to get API credentials.
 
-Additionally, make sure to install the required dependencies by running the following commands in your command prompt:
-> pip install beautifulsoup4
+## Setup Instructions
 
-> pip install spotipy
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/your-username/AnghamiToSpotify.git
+    cd AnghamiToSpotify
+    ```
 
-> pip install tqdm
+2.  **Create a Virtual Environment (Recommended):**
+    ```bash
+    python3 -m venv .venv
+    source .venv/bin/activate
+    # On Windows, use: .venv\Scripts\activate
+    ```
 
-## Getting Started
-Follow the steps listed below to begin the playlist migration:
+3.  **Install Dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-1. Navigate to the playlist (or downloads and likes) you want to duplicate on Anghami's web player. Make sure that all the songs are loaded and viewable by scrolling to the bottom of the playlist.
-2. To save a web page as an HTML file, right-click on it and choose "Save As". Keep in mind the location where the HTML file was saved.
-3. Log in or register for a new account at Spotify for Developers - https://developer.spotify.com/dashboard/.
-4. Once logged in, go to the dashboard and create a new app. This app will allow you to access the Spotify API.
-5. After creating the app, copy the "Client ID" and "Client Secret" values. You may need to click on "Show Client Secret" to reveal it.
-6. Click on "Edit Settings" for your app and set the "Redirect URI" to http://127.0.0.1:8080. After authentication, Spotify will reroute users to this website.
-7. Go to your Spotify account and copy your account username. This will be used to identify your Spotify account during the migration process.
-8. Open the `config.ini` file and update the client ID, client secret and username values with the data you just acquired.
-9. Run the script.
+4.  **Configure Spotify API Credentials:**
+    -   Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/).
+    -   Click **"Create app"**.
+    -   Give it a name (e.g., "Anghami Migrator") and a description.
+    -   Once created, you will see your **Client ID** and you can click to show your **Client Secret**.
+    -   Now, go to **"Edit Settings"**.
+    -   In the **"Redirect URIs"** field, add `http://127.0.0.1:8080`. Click **Save**.
+    -   Rename the `config.ini.example` file to `config.ini`.
+    -   Open `config.ini` and paste your credentials:
+        ```ini
+        [Spotify]
+        client_id = YOUR_SPOTIFY_CLIENT_ID
+        client_secret = YOUR_SPOTIFY_CLIENT_SECRET
+        redirect_url = http://127.0.0.1:8080
+        ```
 
-## Note
-If you saved the HTML file in a different location than the script directory, you will need to update the `html_file_path` variable in `config.int` as well.
+## How to Use
 
-Also, do not forget to update the `playlist_name` variable with the name of the playlist you want to migrate.
+Simply run the main script to start the interactive menu:
 
-## Acknowledgments
-The BeautifulSoup library: https://www.crummy.com/software/BeautifulSoup/
+```bash
+python3 main.py
+```
 
-The Spotipy library: https://spotipy.readthedocs.io/
+You will be presented with the following options:
+
+-   **1. Run the full process (Extract -> Migrate):** This will first launch the song extractor and then immediately run the migrator.
+-   **2. Run only the Song Extractor:** This is useful if you just want to get your Anghami playlist data into the `anghami_extracted_data.json` file.
+-   **3. Run only the Playlist Migrator:** Use this if you have already run the extractor and want to re-run the migration to Spotify.
+
+### First-Time Run
+
+When you run a process that uses the Spotify API for the first time, a browser window will open asking you to authorize the application. After you approve, you will be redirected to a blank page. **Copy the full URL of this page** and paste it back into the terminal when prompted.
+
+## Project Structure
+
+```
+.
+├── main.py           # The main entry point with the user menu
+├── extractor.py      # Script to extract songs from Anghami using Selenium
+├── migration.py      # Script to find songs on Spotify and create the playlist
+├── requirements.txt  # Project dependencies
+├── config.ini.example # Template for the configuration file
+└── README.md         # This file
+```
+
+## Contributing
+
+Contributions are welcome! If you have ideas for improvements or find any bugs, feel free to open an issue or submit a pull request.
+
+---
+
+Made with ❤️ by Pierre Ramez Francis
