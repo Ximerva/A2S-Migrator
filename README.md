@@ -24,8 +24,8 @@ This tool allows you to migrate your liked songs or any public playlist from Ang
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/your-username/AnghamiToSpotify.git
-    cd AnghamiToSpotify
+    git clone https://github.com/PierreRamez/A2S-Migrator.git
+    cd A2S Migrator
     ```
 
 2.  **Create a Virtual Environment (Recommended):**
