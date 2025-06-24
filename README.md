@@ -2,7 +2,6 @@
 
 This tool allows you to migrate your liked songs or any public playlist from Anghami to a new playlist in your Spotify account. It uses a Selenium-based extractor to fetch song data directly from the Anghami web player and a smart matching algorithm to find the corresponding tracks on Spotify.
 
-![Main Menu Screenshot](https://i.imgur.com/your-screenshot.png) <!-- Replace with a real screenshot URL -->
 
 ## Features
 
