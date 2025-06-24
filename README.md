@@ -25,7 +25,7 @@ This tool allows you to migrate your liked songs or any public playlist from Ang
 1.  **Clone the Repository:**
     ```bash
     git clone https://github.com/PierreRamez/A2S-Migrator.git
-    cd A2S Migrator
+    cd "A2S-Migrator"
     ```
 
 2.  **Create a Virtual Environment (Recommended):**
@@ -83,12 +83,30 @@ When you run a process that uses the Spotify API for the first time, a browser w
 ├── migration.py      # Script to find songs on Spotify and create the playlist
 ├── requirements.txt  # Project dependencies
 ├── config.ini        # Template for the configuration file
+├── config.ini        # Template for the configuration file
 └── README.md         # This file
 ```
 
 ## Contributing
 
 Contributions are welcome! If you have ideas for improvements or find any bugs, feel free to open an issue or submit a pull request.
+
+## Supported Browsers
+
+- **Google Chrome** (or Chromium)
+- **Microsoft Edge**
+- **Mozilla Firefox**
+- **Other Chromium-based browsers** (Brave, Vivaldi, Opera, etc.)
+
+When running the extractor, you can now choose "Other Chromium-based browser" and enter the full path to your browser's executable (e.g., `/usr/bin/brave-browser`).
+
+To find the path to your browser, you can use:
+```bash
+which brave-browser
+which vivaldi
+which opera
+which chromium
+```
 
 ---
 

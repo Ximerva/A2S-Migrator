@@ -23,50 +23,50 @@ logger = logging.getLogger()
 def ask_for_browser_choice() -> str:
     """Ask the user to choose a browser."""
     print("Please choose your browser:")
-    print("1. Google Chrome or any other Chromium-based browser")
+    print("1. Google Chrome (or Chromium)")
     print("2. Microsoft Edge")
-    print("3. Mozilla Firefox or any other Gecko-based browser")
+    print("3. Mozilla Firefox")
+    print("4. Other Chromium-based browser (Brave, Vivaldi, Opera, etc.)")
     
     while True:
-        choice = input("Enter the number of your choice (1, 2, or 3): ").strip()
-        if choice == '1':
-            return 'chrome'
-        elif choice == '2':
-            return 'edge'
-        elif choice == '3':
-            return 'firefox'
+        choice = input("Enter the number of your choice (1-4): ").strip()
+        if choice in ['1', '2', '3', '4']:
+            return choice
         else:
-            print("Invalid choice. Please enter 1, 2, or 3.")
+            print("Invalid choice. Please enter 1, 2, 3, or 4.")
 
 def setup_driver(browser_choice: str):
     """Setup the selected browser driver with appropriate options"""
     try:
-        if browser_choice == 'firefox':
+        if browser_choice == '3':
             from selenium.webdriver.firefox.options import Options as FirefoxOptions
             options = FirefoxOptions()
             options.add_argument("--no-sandbox")
             options.add_argument("--disable-dev-shm-usage")
-            # options.add_argument("--headless") # Uncomment for headless mode
-            logger.info("Setting up Firefox driver...")
             driver = webdriver.Firefox(options=options)
             return driver
-        elif browser_choice == 'chrome':
-            from selenium.webdriver.chrome.options import Options as ChromeOptions
-            options = ChromeOptions()
-            options.add_argument("--no-sandbox")
-            options.add_argument("--disable-dev-shm-usage")
-            # options.add_argument("--headless") # Uncomment for headless mode
-            logger.info("Setting up Chrome driver...")
-            driver = webdriver.Chrome(options=options)
-            return driver
-        elif browser_choice == 'edge':
+        elif browser_choice == '2':
             from selenium.webdriver.edge.options import Options as EdgeOptions
             options = EdgeOptions()
             options.add_argument("--no-sandbox")
             options.add_argument("--disable-dev-shm-usage")
-            # options.add_argument("--headless") # Uncomment for headless mode
-            logger.info("Setting up Microsoft Edge driver...")
             driver = webdriver.Edge(options=options)
+            return driver
+        elif browser_choice == '1':
+            from selenium.webdriver.chrome.options import Options as ChromeOptions
+            options = ChromeOptions()
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+            driver = webdriver.Chrome(options=options)
+            return driver
+        elif browser_choice == '4':
+            from selenium.webdriver.chrome.options import Options as ChromeOptions
+            options = ChromeOptions()
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+            custom_path = input("Enter the full path to your browser executable (e.g., /usr/bin/brave-browser): ").strip()
+            options.binary_location = custom_path
+            driver = webdriver.Chrome(options=options)
             return driver
         else:
             # This case should not be hit if input is validated, but it's good practice.
@@ -74,16 +74,7 @@ def setup_driver(browser_choice: str):
             sys.exit(1)
 
     except Exception as e:
-        logger.error(f"Failed to start {browser_choice.capitalize()} driver: {e}")
-        if browser_choice == 'firefox':
-            logger.info("Please make sure Firefox is installed on your system.")
-            logger.info("On Fedora/CentOS: sudo dnf install firefox")
-            logger.info("On Debian/Ubuntu: sudo apt-get install firefox")
-        elif browser_choice == 'chrome':
-            logger.info("Please make sure Google Chrome is installed.")
-        elif browser_choice == 'edge':
-            logger.info("Please make sure Microsoft Edge is installed.")
-        logger.info("Selenium 4 should manage the driver automatically, but the browser itself must be installed.")
+        logger.error(f"Failed to start browser driver: {e}")
         sys.exit(1)
 
 def extract_songs_from_page(driver):
