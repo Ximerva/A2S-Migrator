@@ -82,7 +82,7 @@ When you run a process that uses the Spotify API for the first time, a browser w
 ├── extractor.py      # Script to extract songs from Anghami using Selenium
 ├── migration.py      # Script to find songs on Spotify and create the playlist
 ├── requirements.txt  # Project dependencies
-├── config.ini.example # Template for the configuration file
+├── config.ini        # Template for the configuration file
 └── README.md         # This file
 ```
 
