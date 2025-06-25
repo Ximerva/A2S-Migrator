@@ -47,7 +47,6 @@ This tool allows you to migrate your liked songs or any public playlist from Ang
     -   Once created, you will see your **Client ID** and you can click to show your **Client Secret**.
     -   Now, go to **"Edit Settings"**.
     -   In the **"Redirect URIs"** field, add `http://127.0.0.1:8080`. Click **Save**.
-    -   Rename the `config.ini.example` file to `config.ini`.
     -   Open `config.ini` and paste your credentials:
         ```ini
         [Spotify]
