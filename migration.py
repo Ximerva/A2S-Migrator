@@ -385,8 +385,8 @@ def save_detailed_report(found_tracks: List[Dict], not_found_tracks: List[Dict],
     report_timestamp = timestamp.strftime("%Y-%m-%d %H:%M:%S")
 
     # Define filenames
-    json_filename = f"migration_report_{file_timestamp}.json"
-    txt_filename = f"migration_report_{file_timestamp}.txt"
+    json_filename = f"{playlist_name}_migration_report_{file_timestamp}.json"
+    txt_filename = f"{playlist_name}_migration_report_{file_timestamp}.txt"
 
     # --- Create JSON Report ---
     report_data = {
@@ -516,7 +516,7 @@ def main():
     playlist_name = input(
         "Enter the name for your new Spotify playlist: ").strip()
     if not playlist_name:
-        playlist_name = "Anghami Liked Songs"
+        playlist_name = "Migrated from Anghami"
         logger.info(f"No name provided, using default: '{playlist_name}'")
 
     playlist_id = create_playlist(
