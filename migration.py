@@ -519,6 +519,9 @@ def main():
         playlist_name = "Migrated from Anghami"
         logger.info(f"No name provided, using default: '{playlist_name}'")
 
+    # Sanitize playlist_name for filenames: replace spaces and special characters with underscores
+    sanitized_playlist_name = re.sub(r'[^A-Za-z0-9]+', '_', playlist_name)
+
     playlist_id = create_playlist(
         sp, playlist_name, "Migrated from Anghami using A2S-Migrator (https://github.com/PierreRamez/A2S-Migrator).")
 
@@ -527,7 +530,7 @@ def main():
 
     # Save the detailed migration report
     save_detailed_report(found_tracks_details, not_found_tracks_details,
-                         playlist_name, total_songs_to_process)
+                         sanitized_playlist_name, total_songs_to_process)
 
 
 if __name__ == "__main__":
